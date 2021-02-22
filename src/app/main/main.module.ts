@@ -9,37 +9,25 @@ import { DashComponent } from './dash/dash.component';
 import { AlertsComponent } from './alerts/alerts.component';
 import { DetailsComponent } from './details/details.component';
 import { TutorialsComponent } from './tutorials/tutorials.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HttpClientModule } from '@angular/common/http';
-import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { MatListModule } from '@angular/material/list';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
-import { MatToolbarModule } from '@angular/material/toolbar';
-import { MatIconModule } from '@angular/material/icon';
-import { MatMenuModule } from '@angular/material/menu';
-import { MatDividerModule } from '@angular/material/divider';
-import { MatProgressBarModule } from '@angular/material/progress-bar';
-import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
 
 @NgModule({
   declarations: [PeopleComponent, ProductsComponent, ComodoComponent, AparelhosComponent, DashComponent, AlertsComponent, DetailsComponent, TutorialsComponent],
   imports: [
     CommonModule,
     MainRoutingModule,
-    BrowserModule,
-    BrowserAnimationsModule,
-    HttpClientModule,
-    MatButtonModule,
     MatCardModule,
+    FlexLayoutModule,
+    MatListModule,
+    MatFormFieldModule,
+    MatButtonModule,
     MatInputModule,
-    MatToolbarModule,
-    MatIconModule,
-    MatMenuModule,
-    MatDividerModule,
-    MatProgressBarModule,
-    FormsModule,
-    ReactiveFormsModule
   ]
 })
 export class MainModule { }

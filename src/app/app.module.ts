@@ -15,6 +15,8 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatDividerModule } from '@angular/material/divider';
 import { AuthInterceptor } from './auth/auth.interceptor';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 
 @NgModule({
@@ -35,7 +37,12 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
     MatMenuModule,
     MatDividerModule,
     AuthModule.forRoot(),
-    MatProgressBarModule
+    MatProgressBarModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MatCardModule,
+    FlexLayoutModule,
+
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true},

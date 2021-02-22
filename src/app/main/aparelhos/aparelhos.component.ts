@@ -7,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AparelhosComponent implements OnInit {
 
+  comName: string = '';
+
   constructor() { }
 
   ngOnInit(): void {

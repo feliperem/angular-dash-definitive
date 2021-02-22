@@ -1,1 +1,31 @@
-<p>aparelhos works!</p>
+<mat-card>
+    <div fxLayout="row" fxLayoutAlign="space-between stretch">
+        <div fxFlex="55">
+            <mat-card fxFlex>
+            <mat-card-title>Cômodos</mat-card-title>
+            <mat-card-content>
+                <div fxLayout="column" fxLayoutAlign="space-between">
+                    <mat-form-field>
+                        <input matInput (ngModel)="comName">
+                        <mat-hint>Nome do Cômodo</mat-hint>
+                    </mat-form-field>
+                    <div fxLayout="row" fxLayoutAlign="end end">
+                        <button mat-button color="primary" >Salvar</button>
+                        <button mat-button color="warn" >Cancelar</button>
+                    </div>
+                </div>
+
+                <mat-list>
+
+                </mat-list>
+            </mat-card-content>
+            </mat-card>
+        </div>
+
+
+
+        <div fxFlex="40">
+            Works comodo
+        </div>
+    </div>
+</mat-card>
