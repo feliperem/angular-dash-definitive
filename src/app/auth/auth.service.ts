@@ -26,6 +26,7 @@ export class AuthService {
       .pipe(
         tap((u: User) => {
           localStorage.setItem('token', u.token);
+          localStorage.setItem('id_user', u._id!);
           this.subjLoggedIns$.next(true);
           this.subjUser$.next(u)
         })
@@ -61,6 +62,7 @@ export class AuthService {
 
   logout(){
     localStorage.removeItem('token');
+    localStorage.removeItem('id_user');
     this.subjLoggedIns$.next(false);
     this.subjUser$.next();
   }

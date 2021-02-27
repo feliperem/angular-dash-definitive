@@ -1,4 +1,5 @@
 export interface Comodo {
-    name: String;
-    _id ?: String;
+    name : string;
+    id_user : string;
+    _id ?: string;
 }

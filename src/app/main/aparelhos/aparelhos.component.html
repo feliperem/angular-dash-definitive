@@ -6,23 +6,31 @@
             <mat-card-content>
                 <div fxLayout="column" fxLayoutAlign="space-between">
                     <mat-form-field>
-                        <input matInput (ngModel)="comName">
+                        <input matInput [(ngModel)]="comName" (keyup.enter)="save()">
                         <mat-hint>Nome do Cômodo</mat-hint>
                     </mat-form-field>
                     <div fxLayout="row" fxLayoutAlign="end end">
-                        <button mat-button color="primary" >Salvar</button>
-                        <button mat-button color="warn" >Cancelar</button>
+                        <button mat-button color="primary" (click) = "save()">Salvar</button>
+                        <button mat-button color="warn" (click) = "cancel()">Cancelar</button>
                     </div>
                 </div>
 
                 <mat-list>
-
+                    <h3 mat-subheader>Cômodos</h3>
+                    <mat-list-item *ngFor="let com of comodos">
+                        <mat-icon mat-list-icon>folder</mat-icon>
+                        <h4 mat-line>{{com.name}}</h4>
+                        <button mat-icon-button color="accent" (click) = "delete(com)">
+                            <mat-icon>delete</mat-icon>
+                        </button>
+                        <button mat-icon-button color="primary" (click) = "edit(com)">
+                            <mat-icon>edit</mat-icon>
+                        </button>
+                    </mat-list-item>
                 </mat-list>
             </mat-card-content>
             </mat-card>
         </div>
-
-
 
         <div fxFlex="40">
             Works comodo

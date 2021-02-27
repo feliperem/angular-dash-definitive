@@ -15,11 +15,15 @@ import { MatListModule } from '@angular/material/list';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
+import { MatIconModule } from '@angular/material/icon';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
   declarations: [PeopleComponent, ProductsComponent, ComodoComponent, AparelhosComponent, DashComponent, AlertsComponent, DetailsComponent, TutorialsComponent],
   imports: [
+    FormsModule,
+    ReactiveFormsModule,
     CommonModule,
     MainRoutingModule,
     MatCardModule,
@@ -28,6 +32,7 @@ import { MatInputModule } from '@angular/material/input';
     MatFormFieldModule,
     MatButtonModule,
     MatInputModule,
+    MatIconModule,
   ]
 })
 export class MainModule { }

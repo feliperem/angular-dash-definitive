@@ -3,5 +3,6 @@ export interface Aparelhos {
     comodo: String;
     movel: Boolean;
     assinatura ?: Number;
+    id_user: string;
     _id ?: string;
 }
