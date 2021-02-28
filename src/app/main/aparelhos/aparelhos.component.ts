@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { Aparelhos } from '../aparelhos';
 import { Comodo } from '../comodo';
 import { MainService } from '../main.service';
 
@@ -18,14 +20,34 @@ export class AparelhosComponent implements OnInit {
   com_Id ?: string = '';
   comodos: Comodo[] = [];
   comEdit: boolean = false;
-  private unsubscribe$: Subject<any> = new Subject();
 
-  constructor(private mainService: MainService, private snackBar: MatSnackBar) { }
+  private unsubscribe$: Subject<any> = new Subject();
+  private unsubscribe2$: Subject<any> = new Subject();
+
+  aparelhoForm: FormGroup = this.fb.group({
+    _id: [null],
+    name: ['', [Validators.required]],
+    movel: ['', [Validators.required]],
+    comodo: [[], [Validators.required]],
+    assinatura: [null]
+  });
+
+  aparelhos: Aparelhos[] = [];
+  comodos_list: Comodo[] = [];
+
+  constructor(private mainService: MainService, private snackBar: MatSnackBar, private fb: FormBuilder) { }
 
   ngOnInit(): void {
     this.mainService.getComodos()
       .pipe( takeUntil(this.unsubscribe$))
       .subscribe((coms) => this.comodos = coms);
+
+    this.mainService.getAparelhos()
+      .pipe(takeUntil(this.unsubscribe2$))
+      .subscribe((apars) => this.aparelhos = apars);
+    this.mainService.getComodos()
+      .pipe(takeUntil(this.unsubscribe2$))
+      .subscribe((coms) => this.comodos_list = coms);
   }
 
   save(){
@@ -86,6 +108,11 @@ export class AparelhosComponent implements OnInit {
 
   ngOnDestroy() {
     this.unsubscribe$.next();
+    this.unsubscribe2$.next();
+  }
+
+  save_apar(){
+
   }
 
 }

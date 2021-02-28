@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject, Observable, ReplaySubject, throwError } from 'rxjs';
+import { BehaviorSubject, Observable, combineLatest, throwError } from 'rxjs';
 import { Person } from './person';
 import { Product } from './product';
-import { catchError, tap } from 'rxjs/operators';
+import { catchError, tap, filter, map } from 'rxjs/operators';
 import { Comodo } from './comodo';
 import { Aparelhos } from './aparelhos';
 
@@ -21,7 +21,7 @@ export class MainService {
 
   constructor(private http: HttpClient) { }
 
-  getAparelhos(): Observable<Aparelhos[]>{
+  /*getAparelhos(): Observable<Aparelhos[]>{
     if(!this.loaded2) {
       let id_user = localStorage.getItem('id_user');
       this.http.get<Aparelhos[]>(`${this.url}/aparelhos/${id_user}`)
@@ -29,10 +29,69 @@ export class MainService {
       this.loaded2 = true
     }
     return this.aparelhosSubject$.asObservable();
+  }*/
+
+  getAparelhos(): Observable<Aparelhos[]> {
+    if (!this.loaded2) {
+      let id_user = localStorage.getItem('id_user');
+      combineLatest(
+        this.http.get<Aparelhos[]>(`${this.url}/aparelhos/${id_user}`),
+        this.getComodos())
+      .pipe(
+        tap(([aparelhos,comodos]) => console.log(aparelhos, comodos)),
+        filter(([aparelhos,comodos])=> aparelhos!=null && comodos!=null),
+        map(([aparelhos,comodos])=> {
+          for(let p of aparelhos) {
+            let ids = (p.comodo as unknown as string[]);
+            p.comodo = ids.map((id)=>comodos.find(com=>com._id==id));
+          }
+          return aparelhos;
+        }),
+        tap((aparelhos) => console.log(aparelhos))
+      )
+      .subscribe(this.aparelhosSubject$);
+      this.loaded2 = true;
+    }
+    return this.aparelhosSubject$.asObservable();
   }
 
+  addAparelhos(apar: Aparelhos): Observable<Aparelhos>{
+    let comodos = (apar.comodo as Comodo[]).map(d=>d._id);
+    return this.http.post<Aparelhos>(`${this.url}/Aparelhos`, {...apar, comodos})
+      .pipe( 
+        tap((p) => {
+          this.aparelhosSubject$.getValue()
+            .push({...apar, _id: p._id})
+        })
+      )
+  }
 
-  
+  deleteAparelhos(apar: Aparelhos): Observable<any> {
+    return this.http.delete(`${this.url}/Aparelhos/${apar._id}`)
+    .pipe(
+      tap(() => {
+        let aparelhos = this.aparelhosSubject$.getValue();
+        let i = aparelhos.findIndex(p => p._id === apar._id);
+        if(i >= 0) {
+          aparelhos.splice(i, 1);
+        }
+      })
+    )
+  }
+
+  updateAparelhos(apar: Aparelhos): Observable<Aparelhos>{
+    let comodos = (apar.comodo as Comodo[]).map(d=>d._id);
+    return this.http.patch<Aparelhos>(`${this.url}/${apar._id}`, {...apar, comodos})
+      .pipe(
+        tap(() => {
+          let aparelhos = this.aparelhosSubject$.getValue();
+          let i = aparelhos.findIndex(p => p._id === apar._id);
+          if(i >= 0) {
+            aparelhos[i] = apar;
+          }
+        })
+      )
+  }
 
 //Requisições para comodos
   getComodos(): Observable<Comodo[]>{

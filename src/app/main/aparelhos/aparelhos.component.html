@@ -33,7 +33,38 @@
         </div>
 
         <div fxFlex="40">
-            Works comodo
+            <mat-card fxFlex>
+                <mat-card-title>Aparelhos</mat-card-title>
+                <mat-card-content>
+                    <form [formGroup] = "aparelhoForm" (ngSubmit)="save_apar()" fxLayout="column" fxLayoutAlign="space-between">
+                        <input type="hidden" formControlName="_id">
+
+                        <mat-form-field>
+                            <input matInput placeholder="Nome do aparelho" formControlName="name">
+                        </mat-form-field>
+
+
+                        <mat-form-field>
+                            <mat-select placeholder="Este aparelho pode está em mais de um cômodo?" formControlName="movel">
+                                <mat-option value=true>Sim</mat-option>
+                                <mat-option value=false>Não</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+
+                        <mat-form-field placeholder="Cômodos" formControlName="comodo">
+                            <mat-label>Cômodos</mat-label>
+                            <mat-select>
+                              <mat-option *ngFor="let com of comodos" [value]="com">{{com.name}}</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+
+                        <div fxLayout="row" fxLayoutAlign="end end">
+                            <button mat-button color="primary" fxFlex="10" type="submit">Salvar</button>
+                            <button mat-button color="warn" fxFlex="10" type="cancel">Cancelar</button>
+                        </div>
+                    </form>
+                </mat-card-content>
+            </mat-card>           
         </div>
     </div>
 </mat-card>
