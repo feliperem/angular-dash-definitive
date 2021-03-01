@@ -1,1 +1,85 @@
-<p>dash works!</p>
+
+<highcharts-chart
+
+  [Highcharts]="Highcharts"
+
+  [options]="chartOptions"
+
+  style="width: 100%; height: 400px; display: block;"
+></highcharts-chart>
+
+
+<br><mat-divider></mat-divider><br>
+
+
+
+<mat-divider></mat-divider><br>
+<div fxLayout=row fx fxLayoutAlign="space-between center" fxLayoutGap="20px" class="stats-cards">
+<mat-card fxFlex="50">
+   <div class="text">
+       <h4>Aparelho com maior consumo: {{label}}</h4>
+       <span class="total">{{total}} kWh</span>  
+       <span><mat-icon color="primary">trending_up</mat-icon></span>
+       <span class="description"> {{porcentagem}}%</span>  
+   </div>  
+   
+   <highcharts-chart 
+
+  [Highcharts]="Highcharts"
+
+  [options]="charts1"
+
+  style="width: 90%; height: 100px; display: block;"
+></highcharts-chart>
+</mat-card>
+<mat-card fxFlex="50">
+
+    <div class="text">
+       <h4>Aparelho a mais tempo ligado: {{label1}}</h4>
+       <span class="total">{{total1}} horas</span>  
+       <span><mat-icon color="primary">trending_up</mat-icon></span>
+       <span class="description"> {{porcentagem1}}%</span>  
+   </div> 
+    <highcharts-chart 
+
+  [Highcharts]="Highcharts"
+
+  [options]="charts2"
+
+  style="width: 90%; height: 100px; display: block;"
+></highcharts-chart>
+</mat-card>
+</div>
+<div>
+
+</div>
+
+<br><mat-divider></mat-divider><br>
+
+<div fxLayout="row" fxLayout="space-between center" fxLayoutGap="20px">
+    <div fxFlex="45">
+        <highcharts-chart 
+
+  [Highcharts]="Highcharts"
+
+  [options]="pie1"
+
+  style="width: 100%; display: block;"></highcharts-chart>
+    </div>
+
+    <div fxFlex="45">
+        <highcharts-chart 
+
+        [Highcharts]="Highcharts"
+      
+        [options]="pie2"
+      
+        style="width: 100%; display: block;"></highcharts-chart>
+        
+    </div>
+</div>
+
+<mat-divider></mat-divider>
+
+<div>
+</div>

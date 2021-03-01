@@ -19,7 +19,11 @@ import { MatIconModule } from '@angular/material/icon';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatSelectModule } from '@angular/material/select';
-import { MatChipsModule } from '@angular/material/chips'
+import { MatChipsModule } from '@angular/material/chips';
+import { HighchartsChartModule } from 'highcharts-angular';
+import { MatTableModule } from '@angular/material/table';
+import {MatExpansionModule} from '@angular/material/expansion';
+
 
 
 @NgModule({
@@ -38,7 +42,10 @@ import { MatChipsModule } from '@angular/material/chips'
     MatIconModule,
     MatCheckboxModule,
     MatSelectModule,
-    MatChipsModule
+    MatChipsModule,
+    HighchartsChartModule,
+    MatTableModule,
+    MatExpansionModule
   ]
 })
 export class MainModule { }
