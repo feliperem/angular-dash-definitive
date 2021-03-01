@@ -17,18 +17,11 @@
         <button mat-icon-button routerLink="/main/dash">
             <mat-icon>desktop_windows</mat-icon> Inicio
         </button>
-        <button mat-icon-button [matMenuTriggerFor]="cadastros">
+
+        <button mat-icon-button routerLink="/main/aparelhos">
             <mat-icon>home</mat-icon> Cadastros
         </button>
-        <mat-menu #cadastros="matMenu">
-            <button mat-menu-item routerLink="/main/comodo">
-                <mat-icon>window</mat-icon> Cômodos
-              </button>
-            <mat-divider></mat-divider>
-          <button mat-menu-item routerLink="/main/aparelhos">
-            <mat-icon>settings_cells</mat-icon> Aparelhos
-          </button>
-        </mat-menu>
+
         <button mat-icon-button routerLink="/main/alerts">
             <mat-icon>notification_important</mat-icon> Avisos
         </button>

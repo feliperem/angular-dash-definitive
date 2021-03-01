@@ -38,6 +38,7 @@
                 <mat-card-content>
                     <form [formGroup] = "aparelhoForm" (ngSubmit)="save_apar()" fxLayout="column" fxLayoutAlign="space-between">
                         <input type="hidden" formControlName="_id">
+                        <input type="hidden" formControlName="assinatura">
 
                         <mat-form-field>
                             <input matInput placeholder="Nome do aparelho" formControlName="name">
@@ -51,18 +52,60 @@
                             </mat-select>
                         </mat-form-field>
 
-                        <mat-form-field placeholder="Cômodos" formControlName="comodo">
-                            <mat-label>Cômodos</mat-label>
-                            <mat-select>
-                              <mat-option *ngFor="let com of comodos" [value]="com">{{com.name}}</mat-option>
+                        <!--<mat-form-field>
+                            <mat-select placeholder="Cômodos" formControlName="comodo" multiple>
+                              <mat-select-trigger>
+                                {{aparelhoForm.value.comodos_list ? aparelhoForm.value.comodos_list[0]?.name : ''}}
+                                <span *ngIf="aparelhoForm.value.comodos_list?.length > 1" class="additional-selection">
+                                  (+{{aparelhoForm.value.comodos_list.length - 1}} {{aparelhoForm.value.comodos_list.length === 2 ? 'Outro' : 'Outros'}})
+                                </span>
+                              </mat-select-trigger>
+                              <mat-option *ngFor="let com of comodos_list" [value]="com">{{com.name}}</mat-option>
                             </mat-select>
-                        </mat-form-field>
+                          </mat-form-field>-->
+
+                          <mat-form-field appearance="fill">
+                            <mat-label>Cômodos</mat-label>
+                            <mat-select formControlName="comodo" multiple>
+                              <mat-select-trigger>
+                                {{aparelhoForm.value.comodos_list ? aparelhoForm.value.comodos_list[0] : ''}}
+                                <span *ngIf="aparelhoForm.value.comodos_list?.length > 1" class="additional-selection">
+                                  (+{{aparelhoForm.value.comodos_list.length - 1}} {{aparelhoForm.value.comodos_list?.length === 2 ? 'Outro' : 'Outros'}})
+                                </span>
+                              </mat-select-trigger>
+                              <mat-option *ngFor="let com of comodos_list" [value]="com">{{com.name}}</mat-option>
+                            </mat-select>
+                          </mat-form-field>
 
                         <div fxLayout="row" fxLayoutAlign="end end">
                             <button mat-button color="primary" fxFlex="10" type="submit">Salvar</button>
-                            <button mat-button color="warn" fxFlex="10" type="cancel">Cancelar</button>
+                            <button mat-button color="warn" fxFlex="10" type="reset">Cancelar</button>
                         </div>
                     </form>
+
+                    <ng-container *ngIf="aparelhos.length>0; else empty">
+                        <mat-list>
+                            <h3 mat-subheader>Aparelhos</h3>
+                            <mat-list-item *ngFor="let apar of aparelhos">
+                                <mat-icon mat-list-icon>folder</mat-icon>
+                                <h4 mat-line>{{apar.name}}</h4>
+                                <h4 mat-line>Assinatura: {{apar.assinatura === null ? "Não possui" : apar.assinatura}} - Movel: {{apar.movel === true ? "Sim":"Não"}}</h4>
+                                <mat-chip-list mat-line>
+                                    <mat-chip *ngFor="let d of apar.comodo">{{d.name}}</mat-chip>
+                                </mat-chip-list>
+                                <button mat-icon-button color="accent" (click) = "delete_apar(apar)">
+                                    <mat-icon>delete</mat-icon>
+                                </button>
+                                <button mat-icon-button color="primary" (click) = "edit_apar(apar)">
+                                    <mat-icon>edit</mat-icon>
+                                </button>
+                            </mat-list-item>
+                        </mat-list>
+                    </ng-container>
+                    <ng-template #empty>
+                        <div><em>Vazio</em></div>
+                    </ng-template>
+
                 </mat-card-content>
             </mat-card>           
         </div>

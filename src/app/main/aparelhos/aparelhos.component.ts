@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
@@ -29,8 +29,10 @@ export class AparelhosComponent implements OnInit {
     name: ['', [Validators.required]],
     movel: ['', [Validators.required]],
     comodo: [[], [Validators.required]],
-    assinatura: [null]
+    assinatura: [0],
+    id_user: localStorage.getItem('id_user'),
   });
+
 
   aparelhos: Aparelhos[] = [];
   comodos_list: Comodo[] = [];
@@ -75,7 +77,7 @@ export class AparelhosComponent implements OnInit {
         this.notify('Não foi possivel inserir');
       })
     }
-
+    this.clearFields();
   }
 
   clearFields() {
@@ -85,7 +87,7 @@ export class AparelhosComponent implements OnInit {
   }
 
   cancel(){
-
+    this.clearFields();
   }
 
   edit(com: Comodo) {
@@ -98,7 +100,7 @@ export class AparelhosComponent implements OnInit {
     this.mainService.delComodos(com)
       .subscribe(
         () => this.notify('Removido'),
-        (err) => console.log(err)
+        (err) => this.notify(err.error.msg)
       )
   }
 
@@ -112,7 +114,34 @@ export class AparelhosComponent implements OnInit {
   }
 
   save_apar(){
+    let data = this.aparelhoForm.value;
+    console.log(data);
+    if(data._id != null) {
+      this.mainService.updateAparelhos(data)
+        .subscribe(() => this.notify("Atualizado!"),);
+    } else {
+      this.mainService.addAparelhos(data)
+        .subscribe(
+          () => this.notify("Inserido!"),
+        );
+    }
+    this.resetForm();
+  }
 
+  delete_apar(a: Aparelhos){
+    this.mainService.deleteAparelhos(a)
+      .subscribe(
+        () => this.notify("Apagado!"),
+        (err) => console.log(err)
+      )
+  }
+
+  edit_apar(a: Aparelhos){
+    this.aparelhoForm.setValue(a);
+  }
+
+  resetForm() {
+    this.aparelhoForm.reset();
   }
 
 }

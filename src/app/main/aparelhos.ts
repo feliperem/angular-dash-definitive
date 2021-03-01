@@ -2,9 +2,9 @@ import { Comodo } from "./comodo";
 
 export interface Aparelhos {
     name: String;
-    comodo : String | Comodo[] | unknown;
+    comodo : String | any | Comodo[];
     movel: Boolean;
-    assinatura ?: Number;
+    assinatura : Number;
     id_user: string;
     _id ?: string;
 }

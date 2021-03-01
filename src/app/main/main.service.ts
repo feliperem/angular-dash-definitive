@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable, combineLatest, throwError } from 'rxjs';
 import { Person } from './person';
 import { Product } from './product';
-import { catchError, tap, filter, map } from 'rxjs/operators';
+import { catchError, tap, filter, map, delay } from 'rxjs/operators';
 import { Comodo } from './comodo';
 import { Aparelhos } from './aparelhos';
 
@@ -42,7 +42,7 @@ export class MainService {
         filter(([aparelhos,comodos])=> aparelhos!=null && comodos!=null),
         map(([aparelhos,comodos])=> {
           for(let p of aparelhos) {
-            let ids = (p.comodo as unknown as string[]);
+            let ids = (p.comodo as string[]);
             p.comodo = ids.map((id)=>comodos.find(com=>com._id==id));
           }
           return aparelhos;
@@ -57,7 +57,8 @@ export class MainService {
 
   addAparelhos(apar: Aparelhos): Observable<Aparelhos>{
     let comodos = (apar.comodo as Comodo[]).map(d=>d._id);
-    return this.http.post<Aparelhos>(`${this.url}/Aparelhos`, {...apar, comodos})
+    console.log(apar);
+    return this.http.post<Aparelhos>(`${this.url}/aparelhos`, {...apar, comodos})
       .pipe( 
         tap((p) => {
           this.aparelhosSubject$.getValue()
@@ -67,7 +68,7 @@ export class MainService {
   }
 
   deleteAparelhos(apar: Aparelhos): Observable<any> {
-    return this.http.delete(`${this.url}/Aparelhos/${apar._id}`)
+    return this.http.delete(`${this.url}/aparelhos/${apar._id}`)
     .pipe(
       tap(() => {
         let aparelhos = this.aparelhosSubject$.getValue();
@@ -98,7 +99,9 @@ export class MainService {
     if(!this.loaded){
       let id_user = localStorage.getItem('id_user');
       this.http.get<Comodo[]>(`${this.url}/comodos/${id_user}`)
-      .pipe( tap((coms) => console.log(coms)))
+      .pipe( tap((coms) => console.log(coms)),
+        //delay(1000)
+      )
       .subscribe(this.comodoSubject$);
       this.loaded = true;
     }
