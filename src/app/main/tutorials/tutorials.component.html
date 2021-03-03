@@ -8,7 +8,13 @@
         Informações do Dashboard
       </mat-panel-title>
     </mat-expansion-panel-header>
-    <p>Caros amigos, o fenômeno da Internet prepara-nos para enfrentar situações atípicas decorrentes dos paradigmas corporativos.</p>
+    <p>Ao efetuar o login, a tela abaixo será apresentada mostrando os dados históricos de cada Cômodo (Sensor) nos ultimos 7 dias:<br>
+      <img src="../assets/print-dashboard-comodos.png" alt="">
+      <br>
+      Será mostrado também mais dois grafico dos ultimo 3 dias, o primeiro card a direita mostra o aparelho que mais gastou com o consumo em kWh e o segundo card a esquerda mostra o aparelho que está a mais tempo ligado.<br>
+      Além disso nesta pagina há também  dois graficos em pizza, um que mostra os aparelhso que mais consomem energia em kWh em porcentagem e outro mostra os aparelhos que ficam mais tempo ligados:<br>
+      <img src="../assets/print-dashboard-pizzas.png" alt="">
+    </p>
   </mat-expansion-panel>
 </mat-accordion>
 
@@ -17,24 +23,21 @@
                            (closed)="panelOpenState = false">
         <mat-expansion-panel-header>
           <mat-panel-title>
-            Como cadastrar meu cômodo?
+            Como cadastrar meus cômodos e aparelhos?
           </mat-panel-title>
         </mat-expansion-panel-header>
-        <p>Caros amigos, o fenômeno da Internet prepara-nos para enfrentar situações atípicas decorrentes dos paradigmas corporativos.</p>
+        <p>Na barra de funcionalides acima, o usuario deve clicar na opção 'Cadastros', o usuario deve visualizar uma pagina semelhante a esta:<br>
+          <img src="../assets/cadastro e comodos.png" alt="">
+          A aba 'Cômodos' deve ser preenchida com o nome de preferencia do usuario, porém, deve ser levado em consideração que o número de cômodos deve ser equivalente a quantidade de sensores disponiveis para o usuario, portanto se o usuario possui mais de um comodo alimentado por um disjuntor, este deve ser cadastrado como 1, conforme exemplo acima.
+          Para editar o nome de um Cômodo, basta clicar no icone do lápis ao lado do nome, e para apagar, realizar o mesmo procedimento clicando na lixeira.<br>
+          Vale ressaltar que para excluir um cômodo, é importante que ele não esteja vinculado a nenhum aparelho antes cadastrado.<br><br><br>
+
+          Para cadastrar um aparelho, o usuario na aba 'Aparelhos' deve designar um nome para o aparelho, informar se é um aparelho móvel, ou seja, se pode estar em mais de um cômodo da casa, e selecionar o cômodo que aquele aparelho está.<br>Caso a opção móvel esteja marcada como sim, a opção de cômodo deve ser preenchida apenas para evitar problemas.<br>
+          Para alterar a descrição de um aparelho, clicar no icone do lápis ao lado do nome do aparelho e realizar as alterações. Para excluir, basta clicar no icone da lixeira.
+    
+        </p>
       </mat-expansion-panel>
     </mat-accordion>
-
-    <br><br><br><mat-accordion>
-        <mat-expansion-panel (opened)="panelOpenState = true"
-                               (closed)="panelOpenState = false">
-            <mat-expansion-panel-header>
-              <mat-panel-title>
-                Como cadastrar um aparelho?
-              </mat-panel-title>
-            </mat-expansion-panel-header>
-            <p>Caros amigos, o fenômeno da Internet prepara-nos para enfrentar situações atípicas decorrentes dos paradigmas corporativos.</p>
-          </mat-expansion-panel>
-        </mat-accordion>
 
         <br><br><br><mat-accordion>
             <mat-expansion-panel (opened)="panelOpenState = true"
@@ -44,7 +47,11 @@
                     Coletando assinatura do aparelho
                   </mat-panel-title>
                 </mat-expansion-panel-header>
-                <p>Caros amigos, o fenômeno da Internet prepara-nos para enfrentar situações atípicas decorrentes dos paradigmas corporativos.</p>
+                <p>1 - Acessar o ip xx.xx.xx.xx.<br>
+                    2 - Conectar seu aparelho no coletor de assinatura.<br>
+                  3 - Aguardar 10 segundos até que a coleta termine.<br>
+                4 - Escolher na página o cômodo e o aparelho correspondente ao que foi coletado.<br>
+              5 - Apertar em enviar.</p>
               </mat-expansion-panel>
             </mat-accordion>
 
@@ -56,7 +63,7 @@
                         Obter informações mais detalhada sobre meu consumo
                       </mat-panel-title>
                     </mat-expansion-panel-header>
-                    <p>Caros amigos, o fenômeno da Internet prepara-nos para enfrentar situações atípicas decorrentes dos paradigmas corporativos.</p>
+                    <p>Clicar no icone de detalhes na aba do topo para visualizar as informações em tempo real e de aparelhos especificos.</p>
                   </mat-expansion-panel>
                 </mat-accordion>
 
@@ -68,8 +75,8 @@
                             Notificações sobre o uso dos aparelhos
                           </mat-panel-title>
                         </mat-expansion-panel-header>
-                        <p>Caros amigos, o fenômeno da Internet prepara-nos para enfrentar situações atípicas decorrentes dos paradigmas corporativos.</p>
+                        <p>O icone de Avisos no topo levara para uma pagina que exibirá uma tabela com notificações do sistema sobre consumo e perda de energia.</p>
                       </mat-expansion-panel>
-                    </mat-accordion>
+                    </mat-accordion><br><br><br><br><br>
 </div>
 </div>
