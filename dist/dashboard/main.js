@@ -899,7 +899,8 @@ __webpack_require__.r(__webpack_exports__);
 class AuthService {
     constructor(http) {
         this.http = http;
-        this.url = 'http://localhost:3000/auth';
+        this.url = 'http://191.252.193.18:3000/auth';
+        //readonly url = 'http://localhost:3000/auth';
         this.subjUser$ = new rxjs__WEBPACK_IMPORTED_MODULE_1__["ReplaySubject"](1);
         this.subjLoggedIns$ = new rxjs__WEBPACK_IMPORTED_MODULE_1__["BehaviorSubject"](false);
     }

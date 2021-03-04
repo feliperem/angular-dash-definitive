@@ -10095,7 +10095,8 @@ __webpack_require__.r(__webpack_exports__);
 class MainService {
     constructor(http) {
         this.http = http;
-        this.url = 'http://localhost:3000/api';
+        this.url = 'http://191.252.193.18:3000/api';
+        //readonly url = 'http://localhost:3000/api';
         this.comodoSubject$ = new rxjs__WEBPACK_IMPORTED_MODULE_1__["BehaviorSubject"]([]);
         this.aparelhosSubject$ = new rxjs__WEBPACK_IMPORTED_MODULE_1__["BehaviorSubject"]([]);
         this.loaded = false;

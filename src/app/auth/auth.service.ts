@@ -9,7 +9,8 @@ import { tap, map, catchError } from 'rxjs/operators';
 })
 export class AuthService {
 
-  readonly url = 'http://localhost:3000/auth';
+  readonly url = 'http://191.252.193.18:3000/auth';
+  //readonly url = 'http://localhost:3000/auth';
   private subjUser$ = new ReplaySubject<User>(1);
   private subjLoggedIns$ = new BehaviorSubject<boolean>(false);
   

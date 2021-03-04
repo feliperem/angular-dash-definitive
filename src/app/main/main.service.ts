@@ -12,7 +12,8 @@ import { Aparelhos } from './aparelhos';
 })
 export class MainService {
 
-  readonly url = 'http://localhost:3000/api';
+  readonly url = 'http://191.252.193.18:3000/api';
+  //readonly url = 'http://localhost:3000/api';
 
   private comodoSubject$: BehaviorSubject<Comodo[]> = new BehaviorSubject<Comodo[]>([]);
   private aparelhosSubject$: BehaviorSubject<Aparelhos[]> = new BehaviorSubject<Aparelhos[]>([]);
